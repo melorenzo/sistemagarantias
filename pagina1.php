@@ -1,6 +1,8 @@
-<php? 
-if(isset($_POST['btningresar']))
-{
+<?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('location: index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -16,6 +18,11 @@ if(isset($_POST['btningresar']))
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/script.js"></script>
 </head>
+<navbar>
+    <div class="sesion">
+    <p class="text_sesion">Estas conectado como: <?php echo  $_SESSION['usuario'];  ?></p>
+    </div>
+</navbar>
 <body>
 
     <section class="form_wrap">
@@ -25,39 +32,13 @@ if(isset($_POST['btningresar']))
                 <span class="fa fa-user-circle"></span>
                 <h2>Sistema<br>De Garantias</h2>
             </section>
-            <!--<section class="info_items">
-                <p><span class="fa fa-envelope"></span> info.contact@gmail.com</p>
-                <p><span class="fa fa-mobile"></span> +1(585) 902-8665</p>
-            </section>-->
+            
         </section>
-
-        <form action="" class="form_contact">
-            <h2>Cargar Garantia</h2>
-            <div class="user_info">
-                <label for="names">Tipo y Nro de Contratacion</label>
-                <input type="text" id="Tipo_Garantia">
-
-                <label for="phone">Fecha de Apertura</label>
-                <input type="text" id="Nro_Expediente">
-
-                <label for="email">Actuacion(Nro de Expediente)</label>
-                <input type="text" id="Nro de Proceso">
-
-                <label for="names">Proveedor</label>
-                <input type="text" id="Proveedor">
-
-                <label for="phone">Se Ajusta</label><br>
-                <label for="boton_si">Si</label>
-                <input type="radio" id="boton_si" name="fav_language" value="Si">
-                <label for="boton_no">No</label>
-                <input type="radio" id="boton_no" name="fav_language" value="No">
-                <!--<label for="mensaje">Mensaje *</label>
-                <textarea id="mensaje"></textarea>-->
-
-                <input type="button" value="Siguiente" id="btnSend">
-            </div>
-        </form>
-
+        <div class="container">     
+        <a href="cargar_proceso.php" ><button class="button"  type="button">Nuevo Proceso</button></a>
+        <a href="cargar_garantia.php" ><button class="button"  type="button">Caragar Garantia</button></a>
+        <a href="salir.php" ><button class="button"  type="button">Cerrar Sesion</button></a>
+        </div>
     </section>
 
 </body>

@@ -77,7 +77,7 @@
   $resultado = $conn->query($sql);
    
   // Verificando si el usuario existe en la base de datos.
-  if($resultado){
+  if($resultado == $usuario){
     // Guardo en la sesión el email del usuario.
     $_SESSION['usuario'] = $usuario;
      

@@ -34,6 +34,17 @@ body{
     overflow: hidden;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
+.form_wrap2{
+    width: 1050px;
+    height: 800px;
+    margin: 50px auto;
+    display: flex;
+
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
 
 /* Informacion de Contacto*/
 
@@ -115,6 +126,7 @@ form.form_contact{
     padding: 30px 40px;
 }
 
+
 form.form_contact h2{
 	font-size: 25px;
 	font-weight: 600;
@@ -139,7 +151,8 @@ form.form_contact label{
 }
 
 form.form_contact input,
-form.form_contact textarea{
+form.form_contact textarea,
+form.form_contact datalist{
     width: 100%;
     padding: 8px 0px 5px;
     margin-bottom: 20px;
@@ -275,4 +288,9 @@ form.form_contact input[type="button"]:hover{
 	cursor: pointer;
 
 	float: right;
+}
+.Boton_radio{
+    align-items: center;
+    margin: auto;
+    padding-right: 40%;
 }

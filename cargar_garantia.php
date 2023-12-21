@@ -15,6 +15,9 @@ if (!isset($_SESSION['usuario'])) {
 
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/script.js"></script>
@@ -34,11 +37,11 @@ if (!isset($_SESSION['usuario'])) {
             </section>-->
         </section>
 
-        <form action="" class="form_contact">
+        <form method="post" action="cargar_garantia.php" class="form_contact">
             <h2>Cargar Garantia</h2>
             <div class="user_info">
                 <label for="names">Ingrese el Nro de Proceso</label>
-                <input type="text" name="Nro_Proceso">
+                <input type="text" name="Nro_Procesohtml">
 
                 <div class="button-container">
                     <button name="btnproceso"><span>Buscar Proceso</span></button>
@@ -55,7 +58,8 @@ if (!isset($_SESSION['usuario'])) {
   if(isset($_POST['btnproceso']))
 {
   // Obtengo los datos cargados en el formulario de login.
-  $nro_proceso = $_POST['Nro_Proceso'];
+  $nro_proceso = $_POST['Nro_Procesohtml'];
+  $Proceso= "";
    
   // Datos para conectar a la base de datos.
   $nombreServidor = "localhost";
@@ -72,18 +76,23 @@ if (!isset($_SESSION['usuario'])) {
   }
    
   // Consulta segura para evitar inyecciones SQL.
-  $sql = sprintf("SELECT * FROM procesos WHERE Nro_Proceso = '$nro_proceso'");
+  $sql = sprintf("SELECT Nro_Proceso FROM procesos WHERE Nro_Proceso = '$nro_proceso'");
   $resultado = $conn->query($sql);
-   
+  while ($row = mysqli_fetch_array($resultado)) {
+    $Proceso= $row['Nro_Proceso'];
+  };
   // Verificando si el usuario existe en la base de datos.
-  if($resultado==$nro_proceso){
-     
-    // Redirecciono al usuario a la página de carga del sitio.
-    header("HTTP/1.1 302 Moved Temporarily"); 
-    header("Location: carga_garantia_2.php"); 
-  }else{
-    echo "<div class='alert alert-success' role='alert'><h4>El Numero de Proceso  es incorrecto, <a href='index.php'>vuelva a intenarlo</a>.<br/> 🚨</h4></div>";
-  }
+if($Proceso == $nro_proceso){
+  // Redirecciono al usuario a la página de carga del sitio.
+  $_SESSION['Nro_Procesohtml']= $nro_proceso;
+  header("HTTP/1.1 302 Moved Temporarily"); 
+  header("Location: carga_garantia_2.php"); 
+}else{
+  echo "<div class='alert alert-danger' role='alert'><h4>El Numero de Proceso  es incorrecto, vuelva a intenarlo.🚨</h4></div>";
+  
 }
+
+}
+
  
 ?>

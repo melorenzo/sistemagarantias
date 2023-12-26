@@ -6,6 +6,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'><link rel="stylesheet" href="css/stylelog.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -43,7 +46,7 @@
   </div>
 </div>
 <!-- Portfolio--><a id="portfolio" href="https://chat.whatsapp.com/IYKC4UbsReH0pNtpSn5eo2" title="Escribinos por Whatsapp"><i class="fa fa-whatsapp"></i></a>
-<!-- CodePen--><a id="codepen" href="http://www.infocompras.gq/" title="Sitio Web"><i class="fa fa-globe"></i></a>
+<!-- CodePen--><a id="codepen" href="https://matiaslorenzo.ar/" title="Sitio Web del Diseñador"><i class="fa fa-globe"></i></a>
 <!-- partial -->
   <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="/js/scriptlog.js"></script>
 
@@ -52,41 +55,59 @@
 
 <?php
   session_start();
-  if(isset($_POST['btningresar']))
-{
-  // Obtengo los datos cargados en el formulario de login.
-  $usuario = $_POST['usuario'];
-  $password = $_POST['pass'];
-   
-  // Datos para conectar a la base de datos.
-  $nombreServidor = "localhost";
-  $nombreUsuario = "root";
-  $passwordBaseDeDatos = "";
-  $nombreBaseDeDatos = "sistema_garantias";
+
+  if(isset($_POST['btningresar'])) {
+      // Obtener los datos cargados en el formulario de login.
+      $usuario = $_POST['usuario'];
+      $password = $_POST['pass'];
   
-  // Crear conexión con la base de datos.
-  $conn = new mysqli($nombreServidor, $nombreUsuario, $passwordBaseDeDatos, $nombreBaseDeDatos);
-   
-  // Validar la conexión de base de datos.
-  if ($conn ->connect_error) {
-    die("Connection failed: " . $conn ->connect_error);
+      // Datos para conectar a la base de datos.
+      $nombreServidor = "localhost";
+      $nombreUsuario = "root";
+      $passwordBaseDeDatos = "";
+      $nombreBaseDeDatos = "sistema_garantias";
+  
+      // Crear conexión con la base de datos.
+      $conn = new mysqli($nombreServidor, $nombreUsuario, $passwordBaseDeDatos, $nombreBaseDeDatos);
+  
+      // Validar la conexión de base de datos.
+      if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+      }
+  
+      // Consulta segura para evitar inyecciones SQL.
+      $sql = "SELECT * FROM usuarios WHERE Usuario=?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("s", $usuario);
+      $stmt->execute();
+      $resultado = $stmt->get_result();
+      
+      if ($row = $resultado->fetch_assoc()) {
+          // Verificar la contraseña utilizando password_verify.
+          if (password_verify($password, $row['Clave']) && $row['Tipo'] == "admin") {
+              // Guardar en la sesión el nombre de usuario.
+              $_SESSION['usuario'] = $usuario;
+              $_SESSION['type'] = $row['Tipo'];
+              // Redireccionar al usuario a la página principal del sitio de manera segura.
+              header("Location: pagina1.php", true, 302);
+              exit(); // Importante terminar el script después de la redirección.
+          }elseif(password_verify($password, $row['Clave'])  && $row['Tipo'] != "admin"){
+            // Guardar en la sesión el nombre de usuario.
+            $_SESSION['usuario'] = $usuario;
+            $_SESSION['type'] = $row['Tipo'];
+              
+            // Redireccionar al usuario a la página principal del sitio de manera segura.
+            header("Location: pagina2.php", true, 302);
+            exit(); // Importante terminar el script después de la redirección.
+
+          }
+      }
+  
+      // Cerrar la conexión.
+      $stmt->close();
+      $conn->close();
+  
+      echo "<div class='alert alert-danger' role='alert'><h4>El usuario o la contraseña son incorrectos, <a href='index.php'>inténtelo de nuevo.🚨</h4></div>";
   }
-   
-  // Consulta segura para evitar inyecciones SQL.
-  $sql = sprintf("SELECT * FROM usuarios WHERE Usuario='%s' AND Clave='%s'", mysqli_real_escape_string($usuario), mysqli_real_escape_string($password));
-  $resultado = $conn->query($sql);
-   
-  // Verificando si el usuario existe en la base de datos.
-  if($resultado == $usuario){
-    // Guardo en la sesión el email del usuario.
-    $_SESSION['usuario'] = $usuario;
-     
-    // Redirecciono al usuario a la página principal del sitio.
-    header("HTTP/1.1 302 Moved Temporarily"); 
-    header("Location: pagina1.php"); 
-  }else{
-    echo 'El email o password es incorrecto, <a href="index.php">vuelva a intenarlo</a>.<br/>';
-  }
-}
  
 ?>

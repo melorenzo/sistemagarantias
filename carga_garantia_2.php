@@ -4,6 +4,7 @@ session_start();
 if (!isset($_SESSION['usuario'])) {
     header('location: index.php');
 }
+$proceso=  $_SESSION['Nro_Procesohtml'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,7 +25,7 @@ if (!isset($_SESSION['usuario'])) {
 </head>
 <navbar>
     <div class="sesion">
-    <p class="text_sesion">Estas conectado como: <?php echo  $_SESSION['usuario'];  ?></p>
+    <p class="text_sesion">Estas conectado como: <span class="fuelte"><?php echo  $_SESSION['usuario'];  ?></span><br></p>
     </div>
 </navbar>
 <body>
@@ -40,6 +41,7 @@ if (!isset($_SESSION['usuario'])) {
         </section>
         <form method="post" action="carga_garantia_2.php"class="form_contact">
             <h2>Cargar Garantia</h2>
+                <p class="text_sesion">Usted esta trabajando en el Proceso N°: <span class="fuelte"><?php echo  $proceso;  ?></span><br></p>
             <div class="user_info">
 
             <label for="names">Tipo de Garantia</label>
@@ -65,7 +67,7 @@ if (!isset($_SESSION['usuario'])) {
                 
                 <div class="button-container">
                     <button class="button" name="btncargar" data-toggle="modal" data-target="#myModal"><span>Cargar Garantia</span></button>
-                    <a href="pagina1.php" ><button class="button"  type="button">Atras</button></a>
+                    <a href="pagina2.php" ><button class="button"  type="button">Atras</button></a>
                 </div>
             </div>
         </form>
@@ -84,7 +86,7 @@ if (!isset($_SESSION['usuario'])) {
   $monto = $_POST['Monto'];
   $fecha = $_POST['fecha_garantia'];
   $usuario= $_SESSION['usuario'];
-  $proceso=  $_SESSION['Nro_Procesohtml'];
+  
 
   if($adjudicacion == ""){ $tipo=$oferta; }else{$tipo=$adjudicacion;};
    
@@ -101,7 +103,7 @@ if (!isset($_SESSION['usuario'])) {
   if ($conn ->connect_error) {
     die("Connection failed: " . $conn ->connect_error);
   }
-  $sql = sprintf("SELECT Nro_Proceso FROM procesos WHERE Nro_Proceso = '$proceso'");
+  $sql = sprintf("SELECT Proceso FROM garantias_cargadas WHERE Nro_Proceso = '$proceso'");
   $resultado = $conn->query($sql);
   while ($row = mysqli_fetch_array($resultado)) {
     $Proceso= $row['Nro_Proceso'];
@@ -115,7 +117,7 @@ else{
   $sql = sprintf("INSERT INTO garantias_cargadas (Tipo_garantia, Proveedor, Compania_Aseguradora, Monto, Fecha_Carga, Usuario_Carga, Proceso) VALUES ('$tipo', '$proveedor', '$aseguradora',  '$monto', '$fecha', '$usuario', '$proceso' )");
   if (mysqli_query($conn, $sql)) {
    header("HTTP/1.1 302 Moved Temporarily"); 
-   header("Location: pagina1.php"); 
+   header("Location: pagina2.php"); 
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }

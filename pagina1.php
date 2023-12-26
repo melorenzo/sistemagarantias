@@ -1,8 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario'])) {
-    header('location: index.php');
-}
+if ($_SESSION['type'] != "admin"){header("Location: index.php");}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,7 +19,7 @@ if (!isset($_SESSION['usuario'])) {
 </head>
 <navbar>
     <div class="sesion">
-    <p class="text_sesion">Estas conectado como: <?php echo  $_SESSION['usuario'];  ?></p>
+    <p class="text_sesion">Estas conectado como: <span class="fuelte"><?php echo  $_SESSION['usuario'];  ?>&nbsp; <?php echo  $_SESSION['type'];  ?></span></p>
     </div>
 </navbar>
 <body>
@@ -34,9 +33,10 @@ if (!isset($_SESSION['usuario'])) {
             </section>
             
         </section>
-        <div class="container">     
+        <div class="container"> 
+        <a href="registrar.php" ><button class="button"  type="button">Registrar Usuario</button></a>       
         <a href="cargar_proceso.php" ><button class="button"  type="button">Nuevo Proceso</button></a>
-        <a href="cargar_garantia.php" ><button class="button"  type="button">Caragar Garantia</button></a>
+        <a href="cargar_garantia.php" ><button class="button"  type="button">Cargar Garantia</button></a>
         <a href="salir.php" ><button class="button"  type="button">Cerrar Sesion</button></a>
         </div>
     </section>

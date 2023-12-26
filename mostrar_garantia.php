@@ -42,14 +42,14 @@ if (!isset($_SESSION['usuario'])) {
             </section>-->
         </section>
 
-        <form method="post" action="cargar_garantia.php" class="form_contact">
+        <form method="post" action="mostrar_garantia.php" class="form_contact">
             <h2>Cargar Garantia</h2>
             <div class="user_info">
                 <label for="names">Ingrese el Nro de Proceso</label>
                 <input type="text" name="Nro_Procesohtml">
 
                 <div class="button-container">
-                    <button class="button" name="btnproceso"><span>Buscar Proceso</span></button>
+                    <button class="button" name="btnmostrar"><span>Buscar Proceso</span></button>
                 </div>
             </div>
         </form>
@@ -60,7 +60,7 @@ if (!isset($_SESSION['usuario'])) {
 </html>
 <?php
   
-  if(isset($_POST['btnproceso']))
+  if(isset($_POST['btnmostrar']))
 {
   // Obtengo los datos cargados en el formulario de login.
   $nro_proceso = $_POST['Nro_Procesohtml'];
@@ -91,7 +91,7 @@ if($Proceso == $nro_proceso){
   // Redirecciono al usuario a la página de carga del sitio.
   $_SESSION['Nro_Procesohtml']= $nro_proceso;
   header("HTTP/1.1 302 Moved Temporarily"); 
-  header("Location: carga_garantia_2.php"); 
+  header("Location: mostrar_garantia_2.php"); 
 }else{
   echo "<div class='alert alert-danger' role='alert'><h4>El Numero de Proceso  es incorrecto, vuelva a intenarlo.🚨</h4></div>";
   

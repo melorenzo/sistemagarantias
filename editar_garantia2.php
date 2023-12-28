@@ -39,34 +39,18 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
             </section>
             
         </section>
-        <form method="post" action="carga_garantia_2.php"class="form_contact">
+        <form method="post" action="editar_garantia2.php"class="form_contact">
             <h2>Cargar Garantia</h2>
                 <p class="text_sesion">Usted esta trabajando en el Proceso N°: <span class="fuelte"><?php echo  $proceso;  ?></span><br></p>
             <div class="user_info">
 
             <label for="names">Tipo de Garantia</label>
             <div class="Boton_radio">
-            <label for="Si">Adjudicacion</label>
-                <input type="radio" name="boton_adjudicacion" name="fav_language" value="Adjudicacion">
-                <label for="Si">Oferta</label>
-                <input type="radio" name="boton_oferta" name="fav_language" value="Oferta">
-            </div>    
-
-                <label for="names">Proveedor</label>
-                <input type="text" name="Proveedor">
-
-                <label for="names">Compania Aseguradora</label>
-                <input type="text" name="Aseguradora">
-
-                <label for="names">Monto</label>
-                <input type="text" name="Monto">
-
-                <label>Fecha</label>
-                <input type="date" name="fecha_garantia" required>
-
-                
+                <label for="Devuelta">Devuelta</label>
+                <input type="radio"  name="Devuelta" value="Devuelta">
+            </div>                    
                 <div class="button-container">
-                    <button class="button" name="btncargar" data-toggle="modal" data-target="#myModal"><span>Cargar Garantia</span></button>
+                    <button class="button" name="btncargar" data-toggle="modal" data-target="#myModal"><span>Cargar Devolucion</span></button>
                     <a href="pagina2.php" ><button class="button"  type="button">Atras</button></a>
                 </div>
             </div>
@@ -79,14 +63,8 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
 <?php
   if(isset($_POST['btncargar']))
 {
-  $adjudicacion = $_POST['boton_adjudicacion'];
-  $proveedor = $_POST['Proveedor'];
-  $oferta = $_POST['boton_oferta'];
-  $aseguradora = $_POST['Aseguradora'];
-  $monto = $_POST['Monto'];
-  $fecha = $_POST['fecha_garantia'];
   $usuario= $_SESSION['usuario'];
-  $garantia= $_POST['grantia_digital'];
+  $devuelta= $_POST['Devuelta'];
 
   if($adjudicacion == ""){ $tipo=$oferta; }else{$tipo=$adjudicacion;};
    
@@ -114,10 +92,9 @@ if($proceso == $Proceso){
 }
 else{
   // Caragr en la Base de datos
-  $sql = sprintf("INSERT INTO garantias_cargadas (Tipo_garantia, Proveedor, Compania_Aseguradora, Monto, Fecha_Carga, Usuario_Carga, Proceso) VALUES ('$tipo', '$proveedor', '$aseguradora',  '$monto', '$fecha', '$usuario', '$proceso' )");
+  $sql = sprintf("UPDATE garantias_cargadas SET Devuelta = '$devuelta' WHERE Proceso = '$proceso'");
   if (mysqli_query($conn, $sql)) {
-    header("HTTP/1.1 302 Moved Temporarily"); 
-    header("Location: subir_archivo.php"); 
+    echo "<div class='alert alert-success' role='alert'><h4>Se Cargo la devolucion Correctamente 🚨</h4></div>"; 
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }

@@ -39,34 +39,14 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
             </section>
             
         </section>
-        <form method="post" action="carga_garantia_2.php"class="form_contact">
+        <form action="subir_archivo.php" method="post" enctype="multipart/form-data" class="form_contact">
             <h2>Cargar Garantia</h2>
                 <p class="text_sesion">Usted esta trabajando en el Proceso N°: <span class="fuelte"><?php echo  $proceso;  ?></span><br></p>
-            <div class="user_info">
-
-            <label for="names">Tipo de Garantia</label>
-            <div class="Boton_radio">
-            <label for="Si">Adjudicacion</label>
-                <input type="radio" name="boton_adjudicacion" name="fav_language" value="Adjudicacion">
-                <label for="Si">Oferta</label>
-                <input type="radio" name="boton_oferta" name="fav_language" value="Oferta">
-            </div>    
-
-                <label for="names">Proveedor</label>
-                <input type="text" name="Proveedor">
-
-                <label for="names">Compania Aseguradora</label>
-                <input type="text" name="Aseguradora">
-
-                <label for="names">Monto</label>
-                <input type="text" name="Monto">
-
-                <label>Fecha</label>
-                <input type="date" name="fecha_garantia" required>
-
-                
+            <div class="user_info">  
+                <label for="garantia_digital">Seleccione un archivo PDF:</label>
+                <input type="file" name="garantia_digital" accept=".pdf">
                 <div class="button-container">
-                    <button class="button" name="btncargar" data-toggle="modal" data-target="#myModal"><span>Cargar Garantia</span></button>
+                    <button class="button" type="submit" name="btncargar" data-toggle="modal" data-target="#myModal"><span>Cargar Garantia</span></button>
                     <a href="pagina2.php" ><button class="button"  type="button">Atras</button></a>
                 </div>
             </div>
@@ -103,26 +83,35 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
   if ($conn ->connect_error) {
     die("Connection failed: " . $conn ->connect_error);
   }
-  $sql = sprintf("SELECT Proceso FROM garantias_cargadas WHERE Nro_Proceso = '$proceso'");
-  $resultado = $conn->query($sql);
-  while ($row = mysqli_fetch_array($resultado)) {
-    $Proceso= $row['Nro_Proceso'];
-  };
-  // Verificando si el usuario existe en la base de datos.
-if($proceso == $Proceso){
-    echo "<div class='alert alert-danger' role='alert'><h4>La Garantia de ese Proceso  ya esta cargada.🚨</h4></div>";
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verificar si se seleccionó un archivo
+    if (isset($_FILES['garantia_digital']) && $_FILES['garantia_digital']['error'] === UPLOAD_ERR_OK) {
+        // Ruta de destino para guardar el archivo
+        $directorio_destino = __DIR__ . '/GarantiasDigitales/';
+        // Verificar si el directorio existe, si no, créalo
+        if (!file_exists($directorio_destino)) {
+            mkdir($directorio_destino, 0777, true); // Cambia los permisos según sea necesario
+        }
+        $nombre_archivo = $_FILES['garantia_digital']['name'];
+        $ruta_destino = $directorio_destino . $nombre_archivo;
+
+        // Mover el archivo a la ubicación deseada
+        if (move_uploaded_file($_FILES['garantia_digital']['tmp_name'], $ruta_destino)) {
+            // Caragr en la Base de datos
+            $sql = sprintf("INSERT INTO garantias_digitales (Usuario, Proceso, Nombre_Archivo) VALUES ('$usuario', '$proceso', '$ruta_destino')");
+        } else {
+            echo 'Error al subir el archivo.';
+        }
+    } else {
+        echo 'No se seleccionó ningún archivo o hubo un error en la carga.';
+    }
 }
-else{
-  // Caragr en la Base de datos
-  $sql = sprintf("INSERT INTO garantias_cargadas (Tipo_garantia, Proveedor, Compania_Aseguradora, Monto, Fecha_Carga, Usuario_Carga, Proceso) VALUES ('$tipo', '$proveedor', '$aseguradora',  '$monto', '$fecha', '$usuario', '$proceso' )");
   if (mysqli_query($conn, $sql)) {
-    header("HTTP/1.1 302 Moved Temporarily"); 
-    header("Location: subir_archivo.php"); 
+    echo "<div class='alert alert-success' role='alert'><h4>El archivo se Cargo Correctamente 🚨</h4></div>";  
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 mysqli_close($conn);
-}
 }
  
 

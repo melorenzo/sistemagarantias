@@ -53,7 +53,7 @@ if (!isset($_SESSION['usuario'])) {
                 
                 <div class="button-container">
                     <button class="button" name="btnabrir" data-toggle="modal" data-target="#myModal"><span>Abrir Proceso</span></button>
-                    <a href="pagina1.php" ><button class="button"  type="button">Atras</button></a>
+                    <a href="pagina2.php" ><button class="button"  type="button">Atras</button></a>
                 </div>
             </div>
         </form>

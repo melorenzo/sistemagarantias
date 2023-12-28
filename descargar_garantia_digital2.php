@@ -4,6 +4,7 @@ session_start();
 if (!isset($_SESSION['usuario'])) {
     header('location: index.php');
 }
+$proceso=  $_SESSION['Nro_Procesohtml'];
   // Datos para conectar a la base de datos.
   $nombreServidor = "localhost";
   $nombreUsuario = "root";
@@ -18,8 +19,9 @@ if (!isset($_SESSION['usuario'])) {
     die("Connection failed: " . $conn ->connect_error);
   }
    // Consulta segura para evitar inyecciones SQL.
-   $sql = "SELECT * FROM garantias_cargadas WHERE Devuelta ='' ORDER BY Proceso" ;
+   $sql = "SELECT * FROM garantias_cargadas WHERE Proceso=?";
    $stmt = $conn->prepare($sql);
+   $stmt->bind_param("s", $proceso);
    $stmt->execute();
    $resultado = $stmt->get_result();
 ?>
@@ -43,6 +45,12 @@ if (!isset($_SESSION['usuario'])) {
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/script.js"></script>
 </head>
+<!--<navbar>
+    <div class="sesion">
+    <p class="text_sesion">Estas conectado como: <span class="fuelte"><?php echo  $_SESSION['usuario'];  ?></span><br></p>
+    </div>
+</navbar>-->
+
 <body>
 
     <section class="form_wraptabla">
@@ -56,16 +64,16 @@ if (!isset($_SESSION['usuario'])) {
   <thead>
     <tr class="fuelte">
       <th scope="col">Usuario</th>
-      <th scope="col">Nro Proceso</th>
       <th scope="col">Tipo de Garantia</th>
       <th scope="col">Proveedor</th>
       <th scope="col">Compania Aseguradora</th>
       <th scope="col">Monto</th>
       <th scope="col">Fecha de Carga</th>
+      <th scope="col">Descargar Garantia Digital</th>
     </tr>
   </thead>
   <?php 
-    while ($row = mysqli_fetch_assoc($resultado)) {
+    while ($row = mysqli_fetch_array($resultado)) {
         $Proceso= $row['Proceso'];
         $Tipo_Garantia= $row['Tipo_garantia'];
         $Proveedor= $row['Proveedor'];
@@ -75,21 +83,23 @@ if (!isset($_SESSION['usuario'])) {
         $Usuario_Carga= $row['Usuario_Carga'];
       
       // Verificando si el usuario existe en la base de datos.
-     ?>
+    if($proceso == $Proceso){ ?>
   <tbody>
     <tr>
       <th scope="row"><?php echo  $Usuario_Carga;  ?></th>
-      <td><?php echo  $Proceso;  ?></td>
       <td><?php echo  $Tipo_Garantia;  ?></td>
       <td><?php echo  $Proveedor;  ?></td>
       <td><?php echo  $Compania;  ?></td>
       <td><?php echo  $Monto;  ?></td>
       <td><?php echo  $Fecha_Carga;  ?></td>
-
+      <td><form action='descargar_garantia_digital2.php' method='post'>
+          <button name="btndescargar"type='submit'>Descargar</button>
+          </form>
+      </td>  
     </tr>
   </tbody>
   <?php
-
+}
 };
 ?>
 </table>
@@ -100,7 +110,7 @@ if (!isset($_SESSION['usuario'])) {
                 </div>
             </div>
     <div class="button-container-tabla2">
-                    <a href="descargar_garantia_todas.php" ><button class="button"><span>Descargar</span></button></a>
+                    <a href="descargar_garantia_por_nro .php" ><button class="button"><span>Descargar</span></button></a>
                 </div>
             </div>        
     <footer>
@@ -111,3 +121,68 @@ if (!isset($_SESSION['usuario'])) {
 
 </body>
 </html>
+
+<?php
+  if(isset($_POST['btndescargar']))
+{  
+  // Datos para conectar a la base de datos.
+  $nombreServidor = "localhost";
+  $nombreUsuario = "root";
+  $passwordBaseDeDatos = "";
+  $nombreBaseDeDatos = "sistema_garantias";
+  while ($row = mysqli_fetch_array($resultado)) {
+    $Proceso= $row['Nro_Proceso'];
+  };
+  // Verificando si el usuario existe en la base de datos.
+if($proceso == $Proceso){
+    // Realiza la consulta para obtener el nombre del archivo
+$id_archivo = $proceso; // Cambia esto con el ID correcto del archivo que deseas descargar
+$sql = "SELECT Nombre_Archivo FROM garantias_digitales WHERE Proceso = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id_archivo);
+$stmt->execute();
+$stmt->bind_result($nombre_archivo);
+
+// Obtiene el resultado
+if ($stmt->fetch()) {
+// Definir el directorio de destino
+$directorio_destino =  'GarantiasDigitales' . DIRECTORY_SEPARATOR;
+
+// Verificar si el directorio existe, si no, créalo
+if (!file_exists($directorio_destino)) {
+    mkdir($directorio_destino, 0777, true); // Cambia los permisos según sea necesario
+}
+
+$nombre_archivo = 'Trabajo_final_módulo_3.pdf';  // Sustituir con el nombre real del archivo
+
+// Ruta completa del archivo
+$ruta_completa = $directorio_destino . $nombre_archivo;
+$ruta_completa_formateada = str_replace('\\', '/', $ruta_completa);
+
+if (file_exists($ruta_completa)) {
+  // Configurar las cabeceras para la descarga
+  header('Content-Type: application/octet-stream');
+  header('Content-Disposition: attachment; filename="' . basename($ruta_completa_formateada) . '"');
+  header('Content-Length: ' . filesize($ruta_completa_formateada));
+  header('Cache-Control: must-revalidate');
+  header('Pragma: public');
+  header('Expires: 0');
+
+  // Leer el archivo y enviarlo al navegador
+  readfile($ruta_completa_formateada);
+  exit; 
+} else {
+    // Manejar el caso en el que el archivo no existe
+    echo 'El archivo no se encontró.';
+    echo $ruta_completa;
+}
+} 
+// Cierra la conexión y la declaración
+$stmt->close();
+$conn->close();
+}
+}
+ 
+
+
+?>

@@ -100,7 +100,7 @@ if (!isset($_SESSION['usuario'])) {
                 </div>
             </div>
     <div class="button-container-tabla2">
-                    <a href="descargar_garantia_todas.php" ><button class="button"><span>Descargar</span></button></a>
+                    <a href="informe_todas_garantias.php" ><button class="button"><span>Descargar</span></button></a>
                 </div>
             </div>        
     <footer>

@@ -47,7 +47,7 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
                 <input type="file" name="garantia_digital" accept=".pdf">
                 <div class="button-container">
                     <button class="button" type="submit" name="btncargar" data-toggle="modal" data-target="#myModal"><span>Cargar Garantia</span></button>
-                    <a href="pagina2.php" ><button class="button"  type="button">Atras</button></a>
+                    <a href="pagina2.php" ><button class="button"  type="button">Salir sin Cargar Garantia</button></a>
                 </div>
             </div>
         </form>
@@ -87,7 +87,7 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
     // Verificar si se seleccionó un archivo
     if (isset($_FILES['garantia_digital']) && $_FILES['garantia_digital']['error'] === UPLOAD_ERR_OK) {
         // Ruta de destino para guardar el archivo
-        $directorio_destino = __DIR__ . '/GarantiasDigitales/';
+        $directorio_destino = '/garantias/garantias/GarantiasDigitales/';
         // Verificar si el directorio existe, si no, créalo
         if (!file_exists($directorio_destino)) {
             mkdir($directorio_destino, 0777, true); // Cambia los permisos según sea necesario
@@ -98,7 +98,7 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
         // Mover el archivo a la ubicación deseada
         if (move_uploaded_file($_FILES['garantia_digital']['tmp_name'], $ruta_destino)) {
             // Caragr en la Base de datos
-            $sql = sprintf("INSERT INTO garantias_digitales (Usuario, Proceso, Nombre_Archivo) VALUES ('$usuario', '$proceso', '$ruta_destino')");
+            $sql = sprintf("UPDATE garantias_cargadas SET Nombre_Archivo = '$nombre_archivo', Ubicacion = '$directorio_destino' WHERE Proceso = '$proceso'");
         } else {
             echo 'Error al subir el archivo.';
         }

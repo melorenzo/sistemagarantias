@@ -42,7 +42,7 @@ if (!isset($_SESSION['usuario'])) {
             </section>-->
         </section>
 
-        <form method="post" action="descargar_garantia_digital2.php" class="form_contact">
+        <form method="post" action="descargar_garantia_digital.php" class="form_contact">
             <h2>Cargar Garantia</h2>
             <div class="user_info">
                 <label for="names">Ingrese el Nro de Proceso</label>
@@ -91,7 +91,7 @@ if($Proceso == $nro_proceso){
   // Redirecciono al usuario a la página de carga del sitio.
   $_SESSION['Nro_Procesohtml']= $nro_proceso;
   header("HTTP/1.1 302 Moved Temporarily"); 
-  header("Location: carga_garantia_2.php"); 
+  header("Location: descargar_garantia_digital2.php"); 
 }else{
   echo "<div class='alert alert-danger' role='alert'><h4>El Numero de Proceso  es incorrecto, vuelva a intenarlo.🚨</h4></div>";
   

@@ -64,6 +64,7 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
   <thead>
     <tr class="fuelte">
       <th scope="col">Usuario</th>
+      <th scope="col">Nro Proceso</th>
       <th scope="col">Tipo de Garantia</th>
       <th scope="col">Proveedor</th>
       <th scope="col">Compania Aseguradora</th>
@@ -87,18 +88,17 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
   <tbody>
     <tr>
       <th scope="row"><?php echo  $Usuario_Carga;  ?></th>
+      <td><?php echo  $Proceso;  ?></td>
       <td><?php echo  $Tipo_Garantia;  ?></td>
       <td><?php echo  $Proveedor;  ?></td>
       <td><?php echo  $Compania;  ?></td>
       <td><?php echo  $Monto;  ?></td>
       <td><?php echo  $Fecha_Carga;  ?></td>
-      <td><form action='descargar_garantia_digital2.php' method='post'>
-          <button name="btndescargar"type='submit'>Descargar</button>
-          </form>
-      </td>  
+<?php if($row['Nombre_Archivo'] == ""){echo "<td>No hay Garantia Digital Cargada</td>";} else{ echo "<td><button onclick=\"descargarArchivo('{$row['Ubicacion']}', '{$row['Nombre_Archivo']}')\">Descargar</button></td>"; }?>
     </tr>
   </tbody>
   <?php
+      
 }
 };
 ?>
@@ -121,68 +121,17 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
 
 </body>
 </html>
+<script>
+function descargarArchivo(ubicacion, nombreArchivo) {
+    // Construir la ruta completa del archivo
+    var rutaCompleta = ubicacion + nombreArchivo;
 
-<?php
-  if(isset($_POST['btndescargar']))
-{  
-  // Datos para conectar a la base de datos.
-  $nombreServidor = "localhost";
-  $nombreUsuario = "root";
-  $passwordBaseDeDatos = "";
-  $nombreBaseDeDatos = "sistema_garantias";
-  while ($row = mysqli_fetch_array($resultado)) {
-    $Proceso= $row['Nro_Proceso'];
-  };
-  // Verificando si el usuario existe en la base de datos.
-if($proceso == $Proceso){
-    // Realiza la consulta para obtener el nombre del archivo
-$id_archivo = $proceso; // Cambia esto con el ID correcto del archivo que deseas descargar
-$sql = "SELECT Nombre_Archivo FROM garantias_digitales WHERE Proceso = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id_archivo);
-$stmt->execute();
-$stmt->bind_result($nombre_archivo);
+    // Crear un enlace temporal
+    var enlace = document.createElement('a');
+    enlace.href = rutaCompleta;
+    enlace.download = nombreArchivo;
 
-// Obtiene el resultado
-if ($stmt->fetch()) {
-// Definir el directorio de destino
-$directorio_destino =  'GarantiasDigitales' . DIRECTORY_SEPARATOR;
-
-// Verificar si el directorio existe, si no, créalo
-if (!file_exists($directorio_destino)) {
-    mkdir($directorio_destino, 0777, true); // Cambia los permisos según sea necesario
+    // Simular un clic en el enlace para iniciar la descarga
+    enlace.click();
 }
-
-$nombre_archivo = 'Trabajo_final_módulo_3.pdf';  // Sustituir con el nombre real del archivo
-
-// Ruta completa del archivo
-$ruta_completa = $directorio_destino . $nombre_archivo;
-$ruta_completa_formateada = str_replace('\\', '/', $ruta_completa);
-
-if (file_exists($ruta_completa)) {
-  // Configurar las cabeceras para la descarga
-  header('Content-Type: application/octet-stream');
-  header('Content-Disposition: attachment; filename="' . basename($ruta_completa_formateada) . '"');
-  header('Content-Length: ' . filesize($ruta_completa_formateada));
-  header('Cache-Control: must-revalidate');
-  header('Pragma: public');
-  header('Expires: 0');
-
-  // Leer el archivo y enviarlo al navegador
-  readfile($ruta_completa_formateada);
-  exit; 
-} else {
-    // Manejar el caso en el que el archivo no existe
-    echo 'El archivo no se encontró.';
-    echo $ruta_completa;
-}
-} 
-// Cierra la conexión y la declaración
-$stmt->close();
-$conn->close();
-}
-}
- 
-
-
-?>
+</script>

@@ -5,6 +5,9 @@ if (!isset($_SESSION['usuario'])) {
     header('location: index.php');
 }
 $proceso=  $_SESSION['Nro_Procesohtml'];
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -86,7 +89,7 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
   $monto = $_POST['Monto'];
   $fecha = $_POST['fecha_garantia'];
   $usuario= $_SESSION['usuario'];
-  $garantia= $_POST['grantia_digital'];
+  //$garantia= $_POST['grantia_digital'];
 
   if($adjudicacion == ""){ $tipo=$oferta; }else{$tipo=$adjudicacion;};
    
@@ -103,12 +106,12 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
   if ($conn ->connect_error) {
     die("Connection failed: " . $conn ->connect_error);
   }
-  $sql = sprintf("SELECT Proceso FROM garantias_cargadas WHERE Nro_Proceso = '$proceso'");
+  $sql = sprintf("SELECT Proceso FROM garantias_cargadas WHERE Proceso = '$proceso'");
   $resultado = $conn->query($sql);
   while ($row = mysqli_fetch_array($resultado)) {
-    $Proceso= $row['Nro_Proceso'];
+    $Proceso= $row['Proceso'];
   };
-  // Verificando si el usuario existe en la base de datos.
+  // Verificando si la garantia existe en la base de datos.
 if($proceso == $Proceso){
     echo "<div class='alert alert-danger' role='alert'><h4>La Garantia de ese Proceso  ya esta cargada.🚨</h4></div>";
 }
@@ -116,7 +119,7 @@ else{
   // Caragr en la Base de datos
   $sql = sprintf("INSERT INTO garantias_cargadas (Tipo_garantia, Proveedor, Compania_Aseguradora, Monto, Fecha_Carga, Usuario_Carga, Proceso) VALUES ('$tipo', '$proveedor', '$aseguradora',  '$monto', '$fecha', '$usuario', '$proceso' )");
   if (mysqli_query($conn, $sql)) {
-    header("HTTP/1.1 302 Moved Temporarily"); 
+    header("HTTP/1.1 302 Moved Temporarily");
     header("Location: subir_archivo.php"); 
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);

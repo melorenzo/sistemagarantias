@@ -87,12 +87,12 @@ if (!isset($_SESSION['usuario'])) {
     $Proceso= $row['Nro_Proceso'];
   };
   // Verificando si el usuario existe en la base de datos.
-if($Proceso == $nro_proceso){
-  // Redirecciono al usuario a la página de carga del sitio.
-  $_SESSION['Nro_Procesohtml']= $nro_proceso;
-  header("HTTP/1.1 302 Moved Temporarily"); 
-  header("Location: carga_garantia_2.php"); 
-}else{
+  if($Proceso == $nro_proceso){
+    // Redirecciono al usuario a la página de carga del sitio.
+    $_SESSION['Nro_Procesohtml']= $nro_proceso;
+    header("HTTP/1.1 302 Moved Temporarily"); 
+    header("Location: carga_garantia_2.php"); 
+  }else{
   echo "<div class='alert alert-danger' role='alert'><h4>El Numero de Proceso  es incorrecto, vuelva a intenarlo.🚨</h4></div>";
   
 }

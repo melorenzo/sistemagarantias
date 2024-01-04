@@ -35,7 +35,7 @@ if ($_SESSION['type'] != "user"){header("Location: index.php");}
         <div class="container">  
         <a href="cargar_proceso.php" ><button class="button"  type="button">Nuevo Proceso</button></a>
         <a href="cargar_garantia.php" ><button class="button"  type="button">Cargar Garantia</button></a>
-        <a href="editar_garantia.php" ><button class="button"  type="button">Editar Garantia</button></a>
+        <a href="editar_garantia.php" ><button class="button"  type="button">Devolucion de Garantia</button></a>
         <a href="descargar_garantia_digital.php" ><button class="button"  type="button">Descargar Garantia Digital</button></a>
         <a href="mostrar_garantia.php" ><button class="button"  type="button">Mostrar Gartantias x Nro de Proceso</button></a>
         <a href="mostrar_garantia_todas.php" ><button class="button"  type="button">Mostrar Todas las Garantias</button></a>

@@ -46,14 +46,26 @@ error_reporting(E_ALL);
             <h2>Cargar Garantia</h2>
                 <p class="text_sesion">Usted esta trabajando en el Proceso N°: <span class="fuelte"><?php echo  $proceso;  ?></span><br></p>
             <div class="user_info">
-
+                <div class="radios_buttons">
+            <div class="columna">
             <label for="names">Tipo de Garantia</label>
             <div class="Boton_radio">
             <label for="Si">Adjudicacion</label>
                 <input type="radio" name="boton_adjudicacion" name="fav_language" value="Adjudicacion">
                 <label for="Si">Oferta</label>
                 <input type="radio" name="boton_oferta" name="fav_language" value="Oferta">
+            </div> 
             </div>    
+            <div class="columna">
+                <label for="names">Fisica/Electronica</label>
+            <div class="Boton_radio">
+            <label for="Si">Fisica</label>
+                <input type="radio" name="boton_fisica" name="fav_language" value="Garantia Fisica">
+                <label for="Si">Electronica</label>
+                <input type="radio" name="boton_electronica" name="fav_language" value="Garantia Electronica">
+               
+            </div> 
+            </div>   
 
                 <label for="names">Proveedor</label>
                 <input type="text" name="Proveedor">

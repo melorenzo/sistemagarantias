@@ -342,3 +342,15 @@ form.form_contact input[type="button"]:hover{
 .tittle{
     margin: 15%;
 }
+.radios_buttons{
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
+        gap: 20px; /* Espacio entre columnas */
+        padding: 20px; /* Espacio alrededor del grid */
+    
+}
+.columna {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}

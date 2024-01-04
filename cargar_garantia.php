@@ -50,6 +50,7 @@ if (!isset($_SESSION['usuario'])) {
 
                 <div class="button-container">
                     <button class="button" name="btnproceso"><span>Buscar Proceso</span></button>
+                    <a href="pagina2.php" ><button class="button"  type="button">Atras</button></a>
                 </div>
             </div>
         </form>

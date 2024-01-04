@@ -4,6 +4,7 @@ session_start();
 if (!isset($_SESSION['usuario'])) {
     header('location: index.php');
 }
+$proceso=  $_SESSION['Nro_Procesohtml'];
 
 // Datos para conectar a la base de datos.
 $nombreServidor = "localhost";
@@ -20,7 +21,7 @@ if ($conn->connect_error) {
 }
 
 // Consulta segura para evitar inyecciones SQL.
-$sql = "SELECT * FROM garantias_cargadas WHERE Devuelta = '' ORDER BY Proceso";
+$sql = "SELECT * FROM garantias_cargadas WHERE Devuelta = '' AND Proceso= '$proceso'";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $resultado = $stmt->get_result();
@@ -92,7 +93,7 @@ while ($row = $resultado->fetch_assoc()) {
 $pdf->writeHTML($html, true, false, false, false, '');
 
 // Nombre del archivo PDF
-$nombreArchivo = 'Inventario de Garantias.pdf';
+$nombreArchivo = 'Garantia del Proceso N° '.$proceso.'.pdf';
 
 // Salida del PDF (descarga)
 $pdf->Output($nombreArchivo, 'D');

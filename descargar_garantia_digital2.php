@@ -109,10 +109,7 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
                     <a href="pagina2.php" ><button class="button"><span>Atras</span></button></a>
                 </div>
             </div>
-    <div class="button-container-tabla2">
-                    <a href="descargar_garantia_por_nro .php" ><button class="button"><span>Descargar</span></button></a>
-                </div>
-            </div>        
+        
     <footer>
     <div class="user_abajo">
     <p class="text_sesion_tabla">Estas conectado como: <span class="fuelte"><?php echo  $_SESSION['usuario'];  ?></span><br></p>

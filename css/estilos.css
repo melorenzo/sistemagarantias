@@ -25,7 +25,7 @@ body{
 
 .form_wrap{
     width: 1050px;
-    height: 530px;
+    height: 700px;
     margin: 50px auto;
     display: flex;
 
@@ -338,4 +338,7 @@ form.form_contact input[type="button"]:hover{
     top: 95%;
     left: 25%;
     margin: -25px 0 0 -25px;
+}
+.tittle{
+    margin: 15%;
 }

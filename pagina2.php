@@ -30,9 +30,9 @@ if ($_SESSION['type'] != "user"){header("Location: index.php");}
                 <span class="fa fa-user-circle"></span>
                 <h2>Sistema<br>De Garantias</h2>
             </section>
-            
         </section>
-        <div class="container">     
+        <div class="tittle"><h3>Bienvenidos al Sistema de Garantias</h3></div>
+        <div class="container">  
         <a href="cargar_proceso.php" ><button class="button"  type="button">Nuevo Proceso</button></a>
         <a href="cargar_garantia.php" ><button class="button"  type="button">Cargar Garantia</button></a>
         <a href="editar_garantia.php" ><button class="button"  type="button">Editar Garantia</button></a>

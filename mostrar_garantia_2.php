@@ -106,7 +106,7 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
                 </div>
             </div>
     <div class="button-container-tabla2">
-                    <a href="descargar_garantia_por_nro .php" ><button class="button"><span>Descargar</span></button></a>
+                    <a href="informe_garantias_por_proceso.php" ><button class="button"><span>Descargar</span></button></a>
                 </div>
             </div>        
     <footer>

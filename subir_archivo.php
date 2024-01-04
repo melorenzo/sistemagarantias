@@ -48,6 +48,7 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
                 <div class="button-container">
                     <button class="button" type="submit" name="btncargar" data-toggle="modal" data-target="#myModal"><span>Cargar Garantia</span></button>
                     <a href="pagina2.php" ><button class="button"  type="button">Salir sin Cargar Garantia</button></a>
+                    <a href="pagina2.php" ><button class="button"  type="button">Atras</button></a>
                 </div>
             </div>
         </form>

@@ -43,13 +43,14 @@ if (!isset($_SESSION['usuario'])) {
         </section>
 
         <form method="post" action="mostrar_garantia.php" class="form_contact">
-            <h2>Cargar Garantia</h2>
+            <h2>Buscar Garantia</h2>
             <div class="user_info">
                 <label for="names">Ingrese el Nro de Proceso</label>
                 <input type="text" name="Nro_Procesohtml">
 
                 <div class="button-container">
                     <button class="button" name="btnmostrar"><span>Buscar Proceso</span></button>
+                    <a href="pagina2.php" ><button class="button"  type="button">Atras</button></a>
                 </div>
             </div>
         </form>

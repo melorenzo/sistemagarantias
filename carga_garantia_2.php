@@ -125,10 +125,7 @@ error_reporting(E_ALL);
   };
   // Verificando si la garantia existe en la base de datos.
 if($proceso == $Proceso){
-    echo "<div class='alert alert-danger' role='alert'><h4>La Garantia de ese Proceso  ya esta cargada.🚨</h4></div>";
-}
-else{
-  // Caragr en la Base de datos
+    // Caragr en la Base de datos
   $sql = sprintf("INSERT INTO garantias_cargadas (Tipo_garantia, Proveedor, Compania_Aseguradora, Monto, Fecha_Carga, Usuario_Carga, Proceso) VALUES ('$tipo', '$proveedor', '$aseguradora',  '$monto', '$fecha', '$usuario', '$proceso' )");
   if (mysqli_query($conn, $sql)) {
     header("HTTP/1.1 302 Moved Temporarily");
@@ -137,6 +134,9 @@ else{
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 mysqli_close($conn);
+}
+else{
+    echo "<div class='alert alert-danger' role='alert'><h4>La Garantia no se pudo Cargar 🚨</h4></div>";
 }
 }
  

@@ -34,9 +34,11 @@ if ($_SESSION['type'] != "admin"){header("Location: index.php");}
             
         </section>
         <div class="container"> 
-        <a href="registrar.php" ><button class="button"  type="button">Registrar Usuario</button></a>       
+        <a href="registrar.php" ><button class="button"  type="button">Registrar Usuario</button></a>  
+        <a href="cambiar_contraseña_admin1.php" ><button class="button"  type="button">Cambiar contraseña de Usuario</button></a>
         <a href="cargar_proceso.php" ><button class="button"  type="button">Nuevo Proceso</button></a>
         <a href="cargar_garantia.php" ><button class="button"  type="button">Cargar Garantia</button></a>
+        <a href="http://10.78.11.218/phpmyadmin/" ><button class="button"  type="button">acceso a la base de datos</button></a>
         <a href="salir.php" ><button class="button"  type="button">Cerrar Sesion</button></a>
         </div>
     </section>

@@ -22,33 +22,27 @@ if ($_SESSION['type'] != "admin") {
 <!-- Mixins-->
 <!-- Pen Title-->
 <div class="pen-title">
-  <h1>Ingreso Sistema de Garantias</h1><!--<span>Pen <i class='fa fa-code'></i> by <a href='http://andytran.me'>Andy Tran</a></span>-->
+  <h1>Sistema de Garantias</h1><!--<span>Pen <i class='fa fa-code'></i> by <a href='http://andytran.me'>Andy Tran</a></span>-->
 </div>
 <div class="rerun"><a href="pagina1.php">Atras</a></div>
 <div class="container">
   <div class="card"></div>
   <div class="card">
-    <h1 class="title">Registrar Usuario</h1>
-    <form method="post" action="registrar.php" name="ingresar">
-      <div class="input-container">
+    <h1 class="title">Cambiar contraseña de Usuario</h1>
+    <form method="post" action="cambiar_contraseña_admin1.php" name="ingresar">
+    <div class="input-container">
         <input name="usuario" type="#{type}" id="#{label}" required="required"/>
         <label for="#{label}">Nombre de Usuario</label>
         <div class="bar"></div>
       </div>
       <div class="input-container">
-        <input name="pass" type="password" id="#{label}" required="required"/>
-        <label for="#{label}">Password</label>
-        <div class="bar"></div>
-      </div>
-      <div class="input-container">
-        <input name="tipo" type="text" id="#{label}" required="required"/>
-        <label for="#{label}">Tipo de Usuario</label>
+        <input name="new_password" type="password" id="#{label}" required="required"/>
+        <label for="#{label}">Nuevo Password</label>
         <div class="bar"></div>
       </div>
       <div class="button-container">
         <button name="btnregistrar"><span>Registrar</span></button>
       </div>
-      
       <!--<div class="footer"><a href="#">Forgot your password?</a></div>-->
     </form>
   </div>
@@ -68,15 +62,18 @@ if ($_SESSION['type'] != "admin") {
 <?php
 include 'functions.php';
 
-if (isset($_POST['btnregistrar'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['usuario'], $_POST['new_password'])) {
     $usuario = $_POST['usuario'];
-    $password = $_POST['pass'];
-    $type = $_POST['tipo'];
+    $new_password = $_POST['new_password'];
 
-    if (registrarUsuario($usuario, $password, $type)) {
-        echo "<div class='alert alert-success' role='alert'><h4>El usuario se ha registrado con éxito. <a href='index.php'>Inicio</a></h4></div>";
-    } else {
-        echo "<div class='alert alert-danger' role='alert'><h4>El usuario ya está registrado o hubo un error. <a href='registrar.php'>Inténtelo de nuevo.🚨</a></h4></div>";
+    if (buscarUsuario($usuario)) {
+        if (cambiarContrasena($usuario, $new_password)) {
+            echo "<div class='alert alert-success' role='alert'><h4>Contraseña actualizada correctamente.<a href='index.php'>Inicio</a></h4></div>";
+          } else {
+            echo "<div class='alert alert-danger' role='alert'><h4>Error al intentar actualizar la contraseña. <a href='registrar.php'>Inténtelo de nuevo.🚨</a></h4></div>";
+          }
+    }else {
+        echo $usuario, "<div class='alert alert-danger' role='alert'><h4>Usuario no encontrado. <a href='registrar.php'>Inténtelo de nuevo.🚨</a></h4></div>";
     }
 }
 ?>

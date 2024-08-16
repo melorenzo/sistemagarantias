@@ -118,13 +118,13 @@ error_reporting(E_ALL);
   if ($conn ->connect_error) {
     die("Connection failed: " . $conn ->connect_error);
   }
-  $sql = sprintf("SELECT Proceso FROM garantias_cargadas WHERE Proceso = '$proceso'");
+  $sql = sprintf("SELECT Id_proceso FROM procesos WHERE Nro_Proceso = '$proceso'");
   $resultado = $conn->query($sql);
   while ($row = mysqli_fetch_array($resultado)) {
-    $Proceso= $row['Proceso'];
+    $Id_proceso= $row['Id_proceso'];
   };
   // Verificando si la garantia existe en la base de datos.
-if($proceso == $Proceso){
+if($Id_proceso != 0){
     // Caragr en la Base de datos
   $sql = sprintf("INSERT INTO garantias_cargadas (Tipo_garantia, Proveedor, Compania_Aseguradora, Monto, Fecha_Carga, Usuario_Carga, Proceso) VALUES ('$tipo', '$proveedor', '$aseguradora',  '$monto', '$fecha', '$usuario', '$proceso' )");
   if (mysqli_query($conn, $sql)) {

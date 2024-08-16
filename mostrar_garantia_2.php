@@ -19,9 +19,9 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
     die("Connection failed: " . $conn ->connect_error);
   }
    // Consulta segura para evitar inyecciones SQL.
-   $sql = "SELECT * FROM garantias_cargadas WHERE Proceso=?";
+   $sql = "SELECT * FROM garantias_cargadas WHERE Devuelta ='' ORDER BY Proceso";
    $stmt = $conn->prepare($sql);
-   $stmt->bind_param("s", $proceso);
+   
    $stmt->execute();
    $resultado = $stmt->get_result();
 ?>

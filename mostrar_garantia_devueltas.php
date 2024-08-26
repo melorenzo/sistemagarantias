@@ -4,7 +4,6 @@ session_start();
 if (!isset($_SESSION['usuario'])) {
     header('location: index.php');
 }
-$proceso=  $_SESSION['Nro_Procesohtml'];
   // Datos para conectar a la base de datos.
   $nombreServidor = "localhost";
   $nombreUsuario = "root";
@@ -19,9 +18,8 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
     die("Connection failed: " . $conn ->connect_error);
   }
    // Consulta segura para evitar inyecciones SQL.
-   $sql = "SELECT * FROM garantias_cargadas WHERE Devuelta ='' ORDER BY Proceso";
+   $sql = "SELECT * FROM garantias_cargadas WHERE Devuelta ='Devuelta' ORDER BY Proceso" ;
    $stmt = $conn->prepare($sql);
-   
    $stmt->execute();
    $resultado = $stmt->get_result();
 ?>
@@ -45,12 +43,6 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/script.js"></script>
 </head>
-<!--<navbar>
-    <div class="sesion">
-    <p class="text_sesion">Estas conectado como: <span class="fuelte"><?php echo  $_SESSION['usuario'];  ?></span><br></p>
-    </div>
-</navbar>-->
-
 <body>
 
     <section class="form_wraptabla">
@@ -58,14 +50,15 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
             <section class="info_title">
                 <span class="fa fa-user-circle"></span>
                 <h2>Sistema<br>De Garantias</h2>
-                <a href="pagina2.php" ><button class="button-atras" type="button">Atras</button></a>
-                <a href="informe_garantias_por_proceso.php" ><button class="button-atras" type="button">Descargar</button></a>
+                <a href="pagina2.php" ><button class="button-atras">Atras</button></a>
+                <a href="informe_garantias_devueltas.php" ><button class="button-atras">Descargar</button></a>
             </section>
         </section>
         <table class="table table-striped">
   <thead>
     <tr class="fuelte">
       <th scope="col">Usuario</th>
+      <th scope="col">Nro Proceso</th>
       <th scope="col">Tipo de Garantia</th>
       <th scope="col">Proveedor</th>
       <th scope="col">Compania Aseguradora</th>
@@ -74,7 +67,7 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
     </tr>
   </thead>
   <?php 
-    while ($row = mysqli_fetch_array($resultado)) {
+    while ($row = mysqli_fetch_assoc($resultado)) {
         $Proceso= $row['Proceso'];
         $Tipo_Garantia= $row['Tipo_garantia'];
         $Proveedor= $row['Proveedor'];
@@ -84,10 +77,11 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
         $Usuario_Carga= $row['Usuario_Carga'];
       
       // Verificando si el usuario existe en la base de datos.
-    if($proceso == $Proceso){ ?>
+     ?>
   <tbody>
     <tr>
       <th scope="row"><?php echo  $Usuario_Carga;  ?></th>
+      <td><?php echo  $Proceso;  ?></td>
       <td><?php echo  $Tipo_Garantia;  ?></td>
       <td><?php echo  $Proveedor;  ?></td>
       <td><?php echo  $Compania;  ?></td>
@@ -97,7 +91,7 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
     </tr>
   </tbody>
   <?php
-}
+
 };
 ?>
 </table>
@@ -111,4 +105,3 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
 
 </body>
 </html>
-

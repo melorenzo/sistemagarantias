@@ -57,16 +57,14 @@ mysqli_free_result($resultado);
             <section class="info_title">
                 <span class="fa fa-user-circle"></span>
                 <h2>Sistema<br>De Garantías</h2>
-                <a href="pagina2.php"><button class="button-atras" type="button">Atrás</button></a>
             </section>
         </section>
-        <form method="post" action="editar_garantia2.php" class="form_contact">
+        <form method="post" action="modificar_proceso2.php" class="form_contact">
             <h2>Cargar Garantía</h2>
             <p class="text_sesion">Usted está trabajando en el Proceso N°: <span class="fuelte"><?php echo $proceso; ?></span><br></p>
             
-            <div class="table-container2">
             <div class="user_info">
-                <table class="table table-striped">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>Garantía</th>
@@ -83,7 +81,7 @@ mysqli_free_result($resultado);
                                 echo "<tr>";
                                 echo "<td>" . $row['Tipo_garantia'] . "</td>";
                                 echo "<td>" . $row['Proveedor'] . "</td>";
-                                echo "<td><input type='radio' name='Devuelta' value='Devuelta'></td>";
+                                echo "<td><input type='radio' name='Devuelta' value=''></td>";
                                 echo "</tr>";
                                 $Id_proceso = $row['Id_proceso'];
                             }
@@ -94,10 +92,10 @@ mysqli_free_result($resultado);
                         ?>
                     </tbody>
                 </table>
+                <div class="button-container">
+                    <button class="button" name="btncargar" data-toggle="modal" data-target="#myModal"><span>Cargar Devolución</span></button>
+                    <a href="pagina2.php"><button class="button" type="button">Atrás</button></a>
                 </div>
-                </div>
-            <div class="button-container">
-                <button class="button" name="btncargar" data-toggle="modal" data-target="#myModal"><span>Cargar Devolución</span></button>
             </div>
         </form>
     </section>
@@ -106,29 +104,23 @@ mysqli_free_result($resultado);
 </html>
 
 <?php
-if (isset($_POST['btncargar'])) {
-    $usuario = $_SESSION['usuario'];
-    $devuelta = $_POST['Devuelta'];
-
-    if ($devuelta) {
-        // Crear conexión con la base de datos.
-        $conn = new mysqli($nombreServidor, $nombreUsuario, $passwordBaseDeDatos, $nombreBaseDeDatos);
-
-        // Validar la conexión de base de datos.
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        $sql = sprintf("UPDATE garantias_cargadas SET Devuelta = 'Devuelta' WHERE Id_proceso = '%s'", $Id_proceso);
-        if (mysqli_query($conn, $sql)) {
-            echo "<div class='alert alert-success' role='alert'><h4>Se cargó la devolución correctamente 🚨</h4></div>";
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
-
-        mysqli_close($conn);
-    } else {
-        echo "<div class='alert alert-danger' role='alert'><h4>No se seleccionó ninguna garantía para devolver. 🚨</h4></div>" ;
-    }
+  
+  if(isset($_POST['btncargar']))
+{
+  // Obtengo los datos cargados en el formulario de login.
+  $nro_proceso = $_POST['Nro_Procesohtml'];
+  $Proceso= "";
+  // Verificando si el usuario existe en la base de datos.
+if($Proceso == $nro_proceso){
+  // Redirecciono al usuario a la página de carga del sitio.
+  $_SESSION['Id_Procesohtml']= $Id_proceso;
+  header("HTTP/1.1 302 Moved Temporarily"); 
+  header("Location: modificar_proceso3.php"); 
+}else{
+  echo "<div class='alert alert-danger' role='alert'><h4>El Numero de Proceso  es incorrecto, vuelva a intenarlo.🚨</h4></div>";
+  
 }
+
+}
+
 ?>

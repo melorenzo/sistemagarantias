@@ -39,6 +39,7 @@ error_reporting(E_ALL);
             <section class="info_title">
                 <span class="fa fa-user-circle"></span>
                 <h2>Sistema<br>De Garantias</h2>
+                <a href="pagina2.php" ><button class="button-atras"  type="button">Atras</button></a>
             </section>
             
         </section>
@@ -79,13 +80,17 @@ error_reporting(E_ALL);
                 <label>Fecha</label>
                 <input type="date" name="fecha_garantia" required>
 
+                <label>Observaciones</label>
+                <input type="text" name="observaciones" required>
+
                 
-                <div class="button-container">
-                    <button class="button" name="btncargar" data-toggle="modal" data-target="#myModal"><span>Cargar Garantia</span></button>
-                    <a href="pagina2.php" ><button class="button"  type="button">Atras</button></a>
-                </div>
+                
             </div>
+            <div class="button-container">
+                    <button class="button" name="btncargar" data-toggle="modal" data-target="#myModal"><span>Cargar Garantia</span></button>
+                </div>
         </form>
+        
     </section>
 
 </body>
@@ -101,6 +106,7 @@ error_reporting(E_ALL);
   $monto = $_POST['Monto'];
   $fecha = $_POST['fecha_garantia'];
   $usuario= $_SESSION['usuario'];
+  $observaciones= $_POST['observaciones'];
   //$garantia= $_POST['grantia_digital'];
 
   if($adjudicacion == ""){ $tipo=$oferta; }else{$tipo=$adjudicacion;};
@@ -126,7 +132,7 @@ error_reporting(E_ALL);
   // Verificando si la garantia existe en la base de datos.
 if($Id_proceso != 0){
     // Caragr en la Base de datos
-  $sql = sprintf("INSERT INTO garantias_cargadas (Tipo_garantia, Proveedor, Compania_Aseguradora, Monto, Fecha_Carga, Usuario_Carga, Proceso) VALUES ('$tipo', '$proveedor', '$aseguradora',  '$monto', '$fecha', '$usuario', '$proceso' )");
+  $sql = sprintf("INSERT INTO garantias_cargadas (Tipo_garantia, Proveedor, Compania_Aseguradora, Monto, Fecha_Carga, Usuario_Carga, Proceso, observaciones) VALUES ('$tipo', '$proveedor', '$aseguradora',  '$monto', '$fecha', '$usuario', '$proceso', '$observaciones'  )");
   if (mysqli_query($conn, $sql)) {
     header("HTTP/1.1 302 Moved Temporarily");
     header("Location: subir_archivo.php"); 

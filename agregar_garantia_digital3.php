@@ -5,6 +5,7 @@ if (!isset($_SESSION['usuario'])) {
     header('location: index.php');
 }
 $proceso=  $_SESSION['Nro_Procesohtml'];
+$Id_proceso = $_SESSION['Id_Procesohtml'];
 // Datos para conectar a la base de datos.
 $nombreServidor = "localhost";
 $nombreUsuario = "root";
@@ -17,10 +18,12 @@ $nombreBaseDeDatos = "sistema_garantias";
  if ($conn ->connect_error) {
    die("Connection failed: " . $conn ->connect_error);
  }
- $sql = sprintf("SELECT Id_proceso FROM garantias_cargadas WHERE Proceso = '$proceso' ORDER BY Id_proceso DESC LIMIT 1;");
+ $sql = sprintf("SELECT * FROM garantias_cargadas WHERE Id_proceso = $Id_proceso;");
  $resultado = $conn->query($sql);
  while ($row = mysqli_fetch_array($resultado)) {
-   $Id_proceso= $row['Id_proceso'];
+   $proveedor= $row['Proveedor'];
+   $tipo_garantia= $row['Tipo_garantia'];
+   $compania= $row['Compania_Aseguradora'];
  };
 
 ?>
@@ -57,15 +60,17 @@ $nombreBaseDeDatos = "sistema_garantias";
             </section>
             
         </section>
-        <form action="subir_archivo.php" method="post" enctype="multipart/form-data" class="form_contact">
+        <form action="agregar_garantia_digital3.php" method="post" enctype="multipart/form-data" class="form_contact">
             <h2>Cargar Garantia</h2>
                 <p class="text_sesion">Usted esta trabajando en el Proceso N°: <span class="fuelte"><?php echo  $proceso;  ?></span><br></p>
+                <p class="text_sesion">Usted esta trabajando en el Proveedor : <span class="fuelte"><?php echo  $proveedor;  ?></span><br></p>
+                <p class="text_sesion">Usted esta trabajando en la Garantia de : <span class="fuelte"><?php echo  $tipo_garantia;  ?></span><br></p>
+                <p class="text_sesion">Usted esta trabajando de la Compania: <span class="fuelte"><?php echo  $compania;  ?></span><br></p>
             <div class="user_info">  
                 <label for="garantia_digital">Seleccione un archivo PDF:</label>
                 <input type="file" name="garantia_digital" accept=".pdf">
                 <div class="button-container">
                     <button class="button" type="submit" name="btncargar" data-toggle="modal" data-target="#myModal"><span>Cargar Garantia</span></button>
-                    <a href="pagina2.php" ><button class="button"  type="button">Salir sin Cargar Garantia</button></a>
                     <a href="pagina2.php" ><button class="button"  type="button">Atras</button></a>
                 </div>
             </div>
@@ -130,6 +135,7 @@ $nombreBaseDeDatos = "sistema_garantias";
 }
 
 mysqli_close($conn);
+
 }
  
 

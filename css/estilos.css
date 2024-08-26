@@ -1,29 +1,29 @@
 @font-face {
-  font-family: 'FontAwesome';
-  src: url('../fonts/fontawesome-webfont.eot?v=4.7.0');
-  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.eot?v=4.7.0');
+    src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
 
-:focus{
+:focus {
     outline: none;
 }
 
-body{
+body {
     background: #DBDBDB;
     font-family: 'Open sans';
 }
 
 /* FORMULARIO =================================== */
 
-.form_wrap{
+.form_wrap {
     width: 1050px;
     height: 700px;
     margin: 50px auto;
@@ -34,7 +34,8 @@ body{
     overflow: hidden;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
-.form_wrap2{
+
+.form_wrap2 {
     width: 1050px;
     height: 800px;
     margin: 50px auto;
@@ -45,7 +46,8 @@ body{
     overflow: hidden;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
-.form_wraptabla{
+
+.form_wraptabla {
     width: 90%;
     height: 800px;
     margin: 50px auto;
@@ -59,7 +61,7 @@ body{
 
 /* Informacion de Contacto*/
 
-.cantact_info::before{
+.cantact_info::before {
     content: '';
     width: 100%;
     height: 100%;
@@ -72,7 +74,7 @@ body{
     opacity: 0.9;
 }
 
-.cantact_info{
+.cantact_info {
     width: 38%;
     position: relative;
 
@@ -88,29 +90,29 @@ body{
 }
 
 .info_title,
-.info_items{
+.info_items {
     position: relative;
     z-index: 2;
     color: #fff;
 }
 
-.info_title{
+.info_title {
     margin-bottom: 60px;
 }
 
-.info_title span{
+.info_title span {
     font-size: 100px;
     display: block;
     text-align: center;
     margin-bottom: 15px;
 }
 
-.info_title h2{
+.info_title h2 {
     font-size: 35px;
     text-align: center;
 }
 
-.info_items p{
+.info_items p {
     display: flex;
     align-items: center;
 
@@ -119,12 +121,12 @@ body{
     margin-bottom: 10px;
 }
 
-.info_items p:nth-child(1) span{
+.info_items p:nth-child(1) span {
     font-size: 30px;
     margin-right: 10px;
 }
 
-.info_items p:nth-child(2) span{
+.info_items p:nth-child(2) span {
     font-size: 50px;
     margin-right: 15px;
     margin-left: 4px;
@@ -132,39 +134,39 @@ body{
 
 
 /* Formulario de contacto*/
-form.form_contact{
+form.form_contact {
     width: 62%;
     padding: 30px 40px;
 }
 
 
-form.form_contact h2{
-	font-size: 25px;
-	font-weight: 600;
-	color: #303030;
-	margin-bottom: 30px;
+form.form_contact h2 {
+    font-size: 25px;
+    font-weight: 600;
+    color: #303030;
+    margin-bottom: 30px;
 }
 
-.text_sesion{
-	font-size: 15px;
-	font-weight: 600;
-	color: lightblue;
-	margin-bottom: 30px;
+.text_sesion {
+    font-size: 15px;
+    font-weight: 600;
+    color: lightblue;
+    margin-bottom: 30px;
 }
 
 
-form.form_contact .user_info{
+form.form_contact .user_info {
     display: flex;
     flex-direction: column;
 }
 
-form.form_contact label{
+form.form_contact label {
     font-weight: 600;
 }
 
 form.form_contact input,
 form.form_contact textarea,
-form.form_contact datalist{
+form.form_contact datalist {
     width: 100%;
     padding: 8px 0px 5px;
     margin-bottom: 20px;
@@ -173,75 +175,110 @@ form.form_contact datalist{
     border-bottom: 2px solid #D1D1D1;
 
     font-family: 'Open sans';
-	color: #5A5A5A;
-	font-size: 14px;
-	font-weight: 400;
+    color: #5A5A5A;
+    font-size: 14px;
+    font-weight: 400;
 }
 
-form.form_contact textarea{
+form.form_contact textarea {
     max-width: 100%;
     min-width: 100%;
     max-height: 90px;
 }
 
-form.form_contact input[type="button"]{
+form.form_contact input[type="button"] {
     width: 180px;
-	background: #4091EC;
-	padding: 10px;
-	border: none;
-	border-radius: 25px;
+    background: #4091EC;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
 
     align-self: flex-end;
 
     color: #fff;
-	font-family: 'Open sans';
-	font-size: 16px;
-	font-weight: 600;
-	cursor: pointer;
+    font-family: 'Open sans';
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
 }
+
 .button {
     width: 180px;
-	background: #4091EC;
-	padding: 10px;
-	border: none;
-	border-radius: 25px;
+    background: #4091EC;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
 
     align-self: flex-end;
 
     color: #fff;
-	font-family: 'Open sans';
-	font-size: 16px;
-	font-weight: 600;
-	cursor: pointer;
+    font-family: 'Open sans';
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
     margin-top: 15px;
-  }
-  .container{
-    width: 50px;
-  height: 50px;
-  /* centrar vertical y horizontalmente */
-  position: absolute;
-  top: 30%;
-  left: 55%;
-  margin: -25px 0 0 -25px;
-  }
-  .sesion{
+}
+
+.button-atras {
+    width: 180px;
+    background: #f78b11;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+
+    align-self: flex-end;
+
+    color: #fff;
+    font-family: 'Open sans';
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.button-inicio {
+    width: 180px;
+    background: #f78b11;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+
+    align-self: flex-end;
+
+    color: #fff;
+    font-family: 'Open sans';
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-left: 50px;
+}
+
+.container {
+    width: 100%;
+    /* centrar horizontalmente el contenedor */
+    display: flex;
+    justify-content: center;
+}
+
+.sesion {
     height: 50px;
     position: absolute;
     top: 10%;
     left: 65%;
     margin: -25px 0 0 -25px;
-    
-  }
-  
-form.form_contact input[type="button"]:hover{
+
+}
+
+form.form_contact input[type="button"]:hover {
     background: #3371B6;
 }
 
 /* Ventana de errores*/
-.modal_wrap{
+.modal_wrap {
     width: 100%;
     height: 100vh;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0, 0, 0, 0.7);
 
     position: fixed;
     top: 0;
@@ -253,35 +290,35 @@ form.form_contact input[type="button"]:hover{
     align-items: center;
 }
 
-.mensaje_modal{
+.mensaje_modal {
     background: #fff;
-    box-shadow: 0px 0px 15px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
     width: 400px;
     padding: 30px 20px 15px;
 }
 
-.mensaje_modal h3{
+.mensaje_modal h3 {
     text-align: center;
     font-family: 'Ubuntu';
-	font-size: 20px;
-	font-weight: 400;
+    font-size: 20px;
+    font-weight: 400;
 }
 
-.mensaje_modal h3:after{
+.mensaje_modal h3:after {
     content: '';
-	display: block;
-	width: 100%;
-	height: 1px;
-	background: #C5C5C5;
-	margin: 10px 0px 15px;
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: #C5C5C5;
+    margin: 10px 0px 15px;
 }
 
-.mensaje_modal p{
+.mensaje_modal p {
     font-size: 16px;
     color: #606060;
 }
 
-.mensaje_modal p:before{
+.mensaje_modal p:before {
     content: "\f00d";
     font-family: FontAwesome;
     display: inline-block;
@@ -289,39 +326,44 @@ form.form_contact input[type="button"]:hover{
     margin-right: 8px;
 }
 
-#btnClose{
+#btnClose {
     display: inline-block;
-	padding: 3px 10px;
-	margin-top: 10px;
+    padding: 3px 10px;
+    margin-top: 10px;
 
-	background: #E25151;
-	color: #fff;
-	border: 2px solid #B14141;
-	cursor: pointer;
+    background: #E25151;
+    color: #fff;
+    border: 2px solid #B14141;
+    cursor: pointer;
 
-	float: right;
+    float: right;
 }
-.Boton_radio{
+
+.Boton_radio {
     align-items: center;
     margin: auto;
     padding-right: 40%;
 }
-.fuelte{
+
+.fuelte {
     color: blue;
     font-weight: bold;
 }
-.user_abajo{
+
+.user_abajo {
     margin-top: -38px;
     padding-left: 20px;
-    
+
 }
-.text_sesion_tabla{
+
+.text_sesion_tabla {
     font-size: 15px;
-	font-weight: 600;
-	color: darkblue;
-	margin-bottom: 30px;
+    font-weight: 600;
+    color: darkblue;
+    margin-bottom: 30px;
 }
-.button-container-tabla{
+
+.button-container-tabla {
     width: 50px;
     height: 50px;
     /* centrar vertical y horizontalmente */
@@ -330,7 +372,8 @@ form.form_contact input[type="button"]:hover{
     left: 15%;
     margin: -25px 0 0 -25px;
 }
-.button-container-tabla2{
+
+.button-container-tabla2 {
     width: 50px;
     height: 50px;
     /* centrar vertical y horizontalmente */
@@ -339,18 +382,113 @@ form.form_contact input[type="button"]:hover{
     left: 25%;
     margin: -25px 0 0 -25px;
 }
-.tittle{
-    margin: 15%;
+
+.tittle {
+    text-align: center;
+    /* Centra el texto del título */
+    margin: 20px auto;
+    /* Espacio arriba y abajo del título, centrado horizontalmente */
+    width: 100%;
+    /* Asegura que el título ocupe todo el ancho disponible */
+    max-width: 1050px;
+    /* Ajusta el ancho máximo según el contenedor padre */
 }
-.radios_buttons{
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
-        gap: 20px; /* Espacio entre columnas */
-        padding: 20px; /* Espacio alrededor del grid */
-    
+
+
+.radios_buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Dos columnas de igual ancho */
+    gap: 20px;
+    /* Espacio entre columnas */
+
 }
+
 .columna {
     padding: 15px;
     border: 1px solid #ddd;
     text-align: center;
+}
+
+/* Contenedor del menú */
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* Centra horizontalmente */
+    gap: 20px;
+    /* Espaciado entre botones */
+    width: 100%;
+    /* Asegura que el contenedor ocupe todo el ancho disponible */
+    margin-top: 50px;
+    /* Espaciado superior */
+}
+
+/* Columnas del menú */
+.column {
+    flex: 1 1 200px;
+    /* Flexibilidad para que las columnas se adapten al tamaño del contenedor */
+    max-width: 300px;
+    /* Ajusta el ancho máximo de las columnas si es necesario */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centra los elementos dentro de la columna */
+}
+
+/* Botones del menú */
+.button {
+    width: 100%;
+    /* Asegura que los botones ocupen todo el ancho de la columna */
+    margin-bottom: 10px;
+    /* Espaciado entre botones */
+}
+
+/* Contenedor para la tabla con scroll */
+.table-container {
+    max-height: 800px;
+    /* Ajusta esta altura según sea necesario */
+    overflow-y: auto;
+    /* Agrega el scroll vertical si el contenido es más alto */
+    border: 1px solid #ddd;
+    /* Opcional: para agregar un borde alrededor del contenedor */
+    margin: 20px 0;
+    /* Opcional: para agregar márgenes */
+    padding: 0 10px;
+    /* Opcional: para agregar un poco de relleno a los lados */
+}
+
+.table-container2 {
+    max-height: 300px;
+    /* Ajusta esta altura según sea necesario */
+    overflow-y: auto;
+    /* Agrega el scroll vertical si el contenido es más alto */
+    border: 1px solid #ddd;
+    /* Opcional: para agregar un borde alrededor del contenedor */
+    margin: 20px 0;
+    /* Opcional: para agregar márgenes */
+    padding: 0 10px;
+    /* Opcional: para agregar un poco de relleno a los lados */
+}
+
+/* Asegúrate de que la tabla ocupe el 100% del ancho del contenedor */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Para que las celdas se unan sin espacio entre ellas */
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    /* Espaciado dentro de las celdas */
+    border: 1px solid #ddd;
+    /* Borde de las celdas */
+    text-align: left;
+    /* Alineación del texto */
+}
+
+.table th {
+    background-color: #f4f4f4;
+    /* Fondo del encabezado de la tabla */
 }

@@ -23,26 +23,37 @@ if ($_SESSION['type'] != "user"){header("Location: index.php");}
 </navbar>
 <body>
 
-    <section class="form_wrap">
-
-        <section class="cantact_info">
-            <section class="info_title">
-                <span class="fa fa-user-circle"></span>
-                <h2>Sistema<br>De Garantias</h2>
-            </section>
+<section class="form_wrap">
+    <section class="cantact_info">
+        <section class="info_title">
+            <span class="fa fa-user-circle"></span>
+            <h2>Sistema<br>De Garantias</h2>
+            <a href="cambiar_contraseña.php"><button class="button-inicio" type="button">Cambiar Contraseña</button></a>
+            <a href="salir.php"><button class="button-inicio" type="button">Cerrar Sesion</button></a>
         </section>
-        <div class="tittle"><h3>Bienvenidos al Sistema de Garantias</h3></div>
-        <div class="container">  
-        <a href="cargar_proceso.php" ><button class="button"  type="button">Nuevo Proceso</button></a>
-        <a href="cargar_garantia.php" ><button class="button"  type="button">Cargar Garantia</button></a>
-        <a href="editar_garantia.php" ><button class="button"  type="button">Devolucion de Garantia</button></a>
-        <a href="descargar_garantia_digital.php" ><button class="button"  type="button">Descargar Garantia Digital</button></a>
-        <a href="mostrar_garantia.php" ><button class="button"  type="button">Mostrar Gartantias x Nro de Proceso</button></a>
-        <a href="mostrar_garantia_todas.php" ><button class="button"  type="button">Mostrar Todas las Garantias</button></a>
-        <a href="cambiar_contraseña.php" ><button class="button"  type="button">Cambiar Contraseña</button></a>
-        <a href="salir.php" ><button class="button"  type="button">Cerrar Sesion</button></a>
-        </div>
     </section>
+    <div class="menu">
+    <div class="tittle">
+        <h3>Bienvenidos al Sistema de Garantias</h3>
+    </div>
+        <div class="column">
+            <a href="cargar_proceso.php"><button class="button" type="button">Nuevo Proceso</button></a>
+            <a href="cargar_garantia.php"><button class="button" type="button">Cargar Garantia</button></a>
+            <a href="editar_garantia.php"><button class="button" type="button">Devolucion de Garantia</button></a>
+            <a href="descargar_garantia_digital.php"><button class="button" type="button">Descargar Garantia Digital</button></a>
+        </div>
+        <div class="column">
+            <a href="mostrar_garantia.php"><button class="button" type="button">Mostrar Garantias x Nro de Proceso</button></a>
+            <a href="mostrar_garantia_todas.php"><button class="button" type="button">Mostrar Todas las Garantias</button></a>
+            <a href="mostrar_garantia_devueltas.php"><button class="button" type="button">Garantías dadas de baja</button></a>
+            <a href="agregar_garantia_digital.php"><button class="button" type="button">Agregar Garantia Digital</button></a>
+            <!--<a href="modificar_proceso.php"><button class="button" type="button">Modificar un Proceso</button></a>-->
+        </div>
+    </div>
+</section>
+
+
+
 
 </body>
 </html>

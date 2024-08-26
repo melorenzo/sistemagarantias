@@ -58,6 +58,7 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
             <section class="info_title">
                 <span class="fa fa-user-circle"></span>
                 <h2>Sistema<br>De Garantias</h2>
+                <a href="pagina2.php" ><button class="button-atras" type="button">Atras</button></a>
             </section>
         </section>
         <table class="table table-striped">
@@ -105,10 +106,7 @@ $proceso=  $_SESSION['Nro_Procesohtml'];
 </table>
 
     </section>
-    <div class="button-container-tabla">
-                    <a href="pagina2.php" ><button class="button"><span>Atras</span></button></a>
-                </div>
-            </div>
+    
         
     <footer>
     <div class="user_abajo">
